@@ -1,0 +1,20 @@
+Objetivos y criterios de éxito del proyecto
+
+-Como objetivo principal de nuestro proyecto se encuentra desarrollar y entregar una herramienta de búsqueda y cotización de recursos para la realización de talleres. Estos recursos incluyen desde el lugar donde se realizará el taller, el especialista que impartirá este mismo, entre otros, que deberán ser indicados por el usuario que está ocupando la herramienta.
+-Adicionalmente buscaremos en este proyecto incluir sugerencias con respecto a los insumos que deban ser comprados con ayuda de la inteligencia artificial. Es decir, el mismo software nos entregará opciones con precios y ubicación, en base a eso se entregará una recomendación.
+
+Criterios de éxito del proyecto
+
+Para medir el éxito de nuestro proyecto se tomarán en cuenta diversos aspectos entre los cuales se encuentran:
+-Cumplir con los plazos y fechas planteadas posteriormente en nuestra planificación.
+-Existencia de un registro histórico de las búsquedas en caso de ser necesaria esta información para talleres posteriores similares.
+-Proporcionar una documentación clara y concisa para que el usuario que estará en contacto directo con la herramienta no tenga problemas durante su uso.
+
+Actores relevantes
+
+Los usuarios de nuestra herramienta, talleristas y proveedores desempeñan roles fundamentales en el proyecto y en cómo afecta éste al resultado final entregado por Apprende:
+-Usuarios: Son aquellas personas de Apprende que entraran en contacto directo con el software de búsqueda y cotización. Ellos son quienes realizarán las consultas. Sus comentarios y necesidades guían la funcionalidad y el resultado entregado por la herramienta.
+-Talleristas: Su participación activa, precios competitivos y calidad de servicios contribuyen a la variedad y atractivo de recursos disponibles en la plataforma.
+-Proveedores: Ofrecen recursos como lugares de talleres, insumos y demás. Su disponibilidad, precios y políticas influyen en las decisiones de cotización de los usuarios de la herramienta, y por ende esto a su vez en el resultado final del taller.
+La colaboración efectiva de estos actores es esencial para el éxito del proyecto y la satisfacción general de los usuarios de la herramienta y los clientes, que estos últimos a su vez también influyen en gran medida en las decisiones que se deberán tomar en Apprende, ya que, al fin y al cabo los talleres realizados son en favor de ellos.
+
