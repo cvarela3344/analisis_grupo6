@@ -2,9 +2,10 @@ import openai
 import requests
 import re
 import json
+from time import localtime, strftime
 
 openai.api_key = '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'
-api_key = "AIzaSyCy1y474q1qS3OLBfcauIISBSXVZSsR7AU"
+api_key = "AIzaSyBn_taWgFFDDDdqujQgQEr3veJEShdQUP4 "
 
 def buscar_en_google_custom_search(query, api_key, cx, n):
     base_url = "https://www.googleapis.com/customsearch/v1"
@@ -49,7 +50,7 @@ def buscar_espacios(query):
 def buscar_insumos(query):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=query+" Enlistame todo y con las cantidades especificas entre parentesis al final de cada linea, ya sean unidades, kilos o litros. Delante de cada nombre de insumo ponle un guion.",
+        prompt=query+" Enlistame todo y con las cantidades especificas entre parentesis al final de cada linea, ya sean unidades, kilos o litros. Delante de cada nombre de insumo ponle un guion. Y que solo sean 5 insumos, solo lo imprescindible.",
         max_tokens=500 
     )
 
@@ -72,7 +73,7 @@ def buscar_insumos(query):
 
     print(insumos)
 
-    api_key = "AIzaSyCy1y474q1qS3OLBfcauIISBSXVZSsR7AU"
+    
     cx = "57b7d679f20704b69"
 
     json={}
@@ -90,7 +91,9 @@ def buscar_insumos(query):
 #TALLERISTASSSSSS
 
 def buscar_tallerista(query):
-    cx = "f3f64d9d762a64f38"
+    cx = "875ee1816e8a94de5"
+
+
 
     items=buscar_en_google_custom_search(query, api_key, cx, 5)
 
@@ -107,7 +110,7 @@ def buscar_tallerista(query):
 def hacer_taller(json_data):
     response = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=json_data["user_input"]+" en base a eso necesito que me enumeres 3 cosas poniendo el numero al comienzo. lo que quiero que me enumeres es, 1: que profesional necesito para impartir el taller, 2: que insumos necesito a su vez estos deben estar enlistados todos y con las cantidades especificas entre parentesis al final de cada linea, ya sean unidades, kilos o litros. Delante de cada nombre de insumo ponle un guion y para finalizar 3:que lugar necesito arrendar para realizar el taller, pero sin describirlo, solo el tipo de establecimiento",
+        prompt=json_data["user_input"]+" en base a eso necesito que me enumeres 3 cosas poniendo el numero al comienzo. lo que quiero que me enumeres es, 1: que profesional necesito para impartir el taller (solamente el nombre de la profesión), 2: que insumos necesito a su vez estos deben estar enlistados todos y con las cantidades especificas entre parentesis al final de cada linea, ya sean unidades, kilos o litros. Delante de cada nombre de insumo ponle un guion y para finalizar 3:que lugar necesito arrendar para realizar el taller, pero sin describirlo, solo el tipo de establecimiento y en una sola palabra",
         max_tokens=500 
     )
 
@@ -124,15 +127,15 @@ def hacer_taller(json_data):
     
     espacios=buscar_espacios(query3+"para arrendar")
     
-    json = {}
-    json['Posibles talleristas']=tallerista
-    json['Posibles espacios']=espacios
-    json['Lista de insumos']=insumos
-    json['Fecha de inicio']=json_data["selected_date"]
-    json['Duracion']=json_data["selected_hours"]
+    d = {}
+    d['Posibles talleristas']=tallerista
+    d['Posibles espacios']=espacios
+    d['Lista de insumos']=insumos
+    d['Fecha de inicio']=json_data["selected_date"]
+    d['Duracion']=json_data["selected_hours"]
     
-    with open("logs/sample.json", "w") as outfile:
-        json.dump(json, outfile)
+    with open("logs/{}-{}.json".format(json_data["user_input"],json_data["selected_date"]), "w") as outfile:
+        json.dump(d, outfile)
     
-    return json
+    return d
     

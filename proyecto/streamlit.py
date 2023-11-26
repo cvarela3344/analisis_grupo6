@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import requests
 from datetime import datetime
+import os
 
 from crear_taller import *
 
@@ -114,6 +115,31 @@ def busqueda_espacios():
         else:
             st.write("Por favor, introduce algún texto antes de enviar a la API.")
 
+def logs():
+
+    st.title("Registro histórico de busquedas.")
+
+    directorio_proyecto = os.getcwd()
+    directorio_logs = os.path.join(directorio_proyecto, "logs")
+
+    if not os.path.exists(directorio_logs):
+        st.error("La carpeta 'logs' no existe en el directorio raíz del proyecto.")
+        return
+
+    archivos_json = [archivo for archivo in os.listdir(directorio_logs) if archivo.endswith(".json")]
+
+    archivo_seleccionado = st.selectbox("Selecciona un archivo JSON", archivos_json)
+
+    if archivo_seleccionado:
+
+        with open(os.path.join(directorio_logs, archivo_seleccionado), "r") as archivo:
+            contenido_json = archivo.read()
+
+            try:
+                json_data = json.loads(contenido_json)
+                st.json(json_data)
+            except json.JSONDecodeError:
+                st.error("Error al decodificar el archivo JSON. Asegúrate de que el archivo sea válido.")
 
 def main():
     
@@ -123,7 +149,7 @@ def main():
     app_selection = st.sidebar.selectbox(
         'Selecciona una aplicación:',
         ('Crea un taller', 'Busca insumos para tu taller', 'Busca talleristas',
-         'Busca espacios')
+         'Busca espacios', "Registros")
     )
 
     if app_selection == 'Crea un taller':
@@ -134,6 +160,8 @@ def main():
         busqueda_talleristas()
     elif app_selection == 'Busca espacios':
         busqueda_espacios()
+    elif app_selection == "Registros":
+        logs()
 
 if __name__ == "__main__":
     main()
